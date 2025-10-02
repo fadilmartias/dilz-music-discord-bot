@@ -8,7 +8,7 @@ ENV_FILE = .env
 
 ## Run in development mode (with air hot reload)
 dev:
-	$(DOCKER_COMPOSE) -f docker-compose.override.yml up --build
+	$(DOCKER_COMPOSE) -f docker-compose.override.yml up --watch
 
 ## Run in production mode (detached)
 prod:
