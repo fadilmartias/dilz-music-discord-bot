@@ -1,0 +1,10 @@
+version: "3.9"
+
+services:
+  discord-bot:
+    build:
+      context: .
+      target: prod   # langsung build stage prod aja
+    container_name: dilz-music-bot
+    volumes:
+      - ./.env:/app/.env

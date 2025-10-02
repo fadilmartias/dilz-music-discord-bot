@@ -1,0 +1,28 @@
+services:
+  discord-bot:
+    build:
+      context: .
+      target: dev 
+    container_name: dilz-music-discord-bot-dev
+    volumes:
+      - ./.env:/app/.env
+      - go-mod-cache:/go/pkg/mod
+      - go-build-cache:/root/.cache/go-build
+    develop:
+      watch:
+        - action: sync
+          path: .
+          target: /app
+          ignore:
+            - logs
+            - tmp
+            - vendor
+        - action: rebuild
+          path: go.mod
+        - action: rebuild
+          path: go.sum
+
+
+volumes:
+  go-mod-cache:
+  go-build-cache:
