@@ -4,11 +4,14 @@ DOCKER_COMPOSE = docker compose
 # Default env file
 ENV_FILE = .env
 
-.PHONY: dev prod logs stop clean rebuild
+.PHONY: dev dev-build prod logs stop clean rebuild
 
 ## Run in development mode (with air hot reload)
 dev:
 	$(DOCKER_COMPOSE) -f docker-compose.override.yml up --watch
+
+dev-build:
+	$(DOCKER_COMPOSE) -f docker-compose.override.yml up --build --watch
 
 ## Run in production mode (detached)
 prod:

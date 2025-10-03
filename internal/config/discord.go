@@ -6,7 +6,8 @@ import (
 )
 
 type DiscordConfig struct {
-	BotToken string
+	BotToken  string
+	BotToken2 string
 }
 
 var (
@@ -17,7 +18,8 @@ var (
 func LoadDiscordConfig() *DiscordConfig {
 	discordOnce.Do(func() {
 		discordConfig = &DiscordConfig{
-			BotToken: os.Getenv("DISCORD_BOT_TOKEN"),
+			BotToken:  os.Getenv("DISCORD_BOT_TOKEN"),
+			BotToken2: os.Getenv("DISCORD_BOT_TOKEN2"),
 		}
 	})
 	return discordConfig

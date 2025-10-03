@@ -10,13 +10,21 @@ import (
 	"github.com/fadilmartias/dilz-music-discord-bot/internal/config"
 )
 
+type DiscordServiceInterface interface {
+	RegisterHandler(handler any)
+	Start() error
+	Stop()
+	GetSession() *discordgo.Session
+	GetToken() string
+}
+
 type DiscordService struct {
 	Client *discordgo.Session
-	token  string
+	Token  string
 }
 
 // NewDiscordService membuat service baru dengan inisialisasi discordgo.Session
-func NewDiscordService() *DiscordService {
+func NewDiscordService(ms *MusicService) *DiscordService {
 	cfg := config.LoadDiscordConfig()
 
 	dg, err := discordgo.New("Bot " + cfg.BotToken)
@@ -27,7 +35,7 @@ func NewDiscordService() *DiscordService {
 
 	return &DiscordService{
 		Client: dg,
-		token:  cfg.BotToken,
+		Token:  cfg.BotToken,
 	}
 }
 
@@ -64,5 +72,5 @@ func (s *DiscordService) GetSession() *discordgo.Session {
 }
 
 func (s *DiscordService) GetToken() string {
-	return s.token
+	return s.Token
 }

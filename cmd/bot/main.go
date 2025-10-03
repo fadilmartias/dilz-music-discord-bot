@@ -18,15 +18,16 @@ func main() {
 	}
 
 	// Create service
-	discordService := service.NewDiscordService()
+	musicService := service.NewMusicService()
+	discordService := service.NewDiscordService(musicService)
 	if discordService == nil {
 		fmt.Println("Failed to initialize Discord service")
 		return
 	}
 
 	// Create handler
-	musicService := service.NewMusicService()
-	musicUC := usecase.NewMusicUsecase(musicService)
+	spotifyService := service.NewSpotifyService()
+	musicUC := usecase.NewMusicUsecase(musicService, spotifyService)
 	discordHandler := handler.NewDiscordHandler(musicUC)
 	messageHandler := discordHandler.MessageCreate
 

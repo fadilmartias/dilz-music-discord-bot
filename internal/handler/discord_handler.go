@@ -28,7 +28,7 @@ func (h *DiscordHandler) MessageCreate(s *discordgo.Session, m *discordgo.Messag
 			s.ChannelMessageSend(m.ChannelID, "Usage: ;play <url>")
 			return
 		}
-		err := h.musicUC.PlayMusic(s, m.GuildID, m.Author.ID, args[1])
+		err := h.musicUC.PlayMusic(s, m.GuildID, m.Author.ID, m.Author.Username, args[1])
 		if err != nil {
 			s.ChannelMessageSend(m.ChannelID, "Error: "+err.Error())
 		} else {
